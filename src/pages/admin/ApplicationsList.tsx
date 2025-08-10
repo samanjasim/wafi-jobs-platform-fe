@@ -208,10 +208,12 @@ const ApplicationsList = () => {
                       </div>
 
                       {/* Additional Info */}
-                      {application.formData.expPosition && (
+                      {application.formData.workExperiences && 
+                       application.formData.workExperiences.length > 0 && 
+                       application.formData.workExperiences[0].expPosition && (
                         <div className="text-sm">
                           <span className="text-gray-500">المنصب السابق: </span>
-                          <span className="text-gray-900">{application.formData.expPosition}</span>
+                          <span className="text-gray-900">{application.formData.workExperiences[0].expPosition}</span>
                         </div>
                       )}
 

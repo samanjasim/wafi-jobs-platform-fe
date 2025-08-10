@@ -46,9 +46,9 @@ export interface JobApplicationFormData {
   workExperiences?: WorkExperience[];
 
   // Company Related Questions (Required)
-  appliedBefore: boolean;
+  appliedBefore: string;
   appliedBeforeWhen?: string;
-  relativesInCompany: boolean;
+  relativesInCompany: string;
   relativesDetails?: string;
 
   // Signature Information (Required)

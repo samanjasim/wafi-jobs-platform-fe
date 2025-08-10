@@ -37,9 +37,9 @@ export const JobApplicationSchema = z.object({
   workExperiences: z.array(WorkExperienceSchema).optional(),
 
   // Company Questions (Required)
-  appliedBefore: z.string().min(1, 'يرجى الإجابة على هذا السؤال').transform((val) => val === 'true'),
+  appliedBefore: z.string().min(1, 'يرجى الإجابة على هذا السؤال'),
   appliedBeforeWhen: z.string().optional(),
-  relativesInCompany: z.string().min(1, 'يرجى الإجابة على هذا السؤال').transform((val) => val === 'true'),
+  relativesInCompany: z.string().min(1, 'يرجى الإجابة على هذا السؤال'),
   relativesDetails: z.string().optional(),
 
   // Signature (Required)

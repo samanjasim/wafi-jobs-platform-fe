@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getSubmissionDetails, updateSubmissionStatus } from '@/services/api';
 import { SubmissionStatus } from '@/types';
@@ -24,7 +24,6 @@ import {
 
 const ApplicationDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   
   const [isEditingStatus, setIsEditingStatus] = useState(false);
@@ -288,41 +287,51 @@ const ApplicationDetails = () => {
             )}
 
             {/* Work Experience */}
-            {(application.formData.expCompany || application.formData.expPosition) && (
+            {application.formData.workExperiences && application.formData.workExperiences.length > 0 && 
+             application.formData.workExperiences.some(exp => exp.expCompany || exp.expPosition || exp.expDuration || exp.expReason) && (
               <div className="bg-white shadow rounded-lg p-6">
                 <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4">
                   <Briefcase className="h-5 w-5 text-primary-600" />
-                  <h2 className="text-lg font-semibold text-gray-900">الخبرة العملية</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">الخبرات العملية</h2>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {application.formData.expCompany && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">الشركة السابقة</label>
-                      <p className="mt-1 text-sm text-gray-900">{application.formData.expCompany}</p>
-                    </div>
-                  )}
-                  
-                  {application.formData.expPosition && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">المنصب</label>
-                      <p className="mt-1 text-sm text-gray-900">{application.formData.expPosition}</p>
-                    </div>
-                  )}
-                  
-                  {application.formData.expDuration && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">مدة العمل</label>
-                      <p className="mt-1 text-sm text-gray-900">{application.formData.expDuration}</p>
-                    </div>
-                  )}
-                  
-                  {application.formData.expReason && (
-                    <div>
-                      <label className="text-sm font-medium text-gray-500">سبب ترك العمل</label>
-                      <p className="mt-1 text-sm text-gray-900">{application.formData.expReason}</p>
-                    </div>
-                  )}
+                <div className="space-y-6">
+                  {application.formData.workExperiences.map((experience, index) => (
+                    (experience.expCompany || experience.expPosition || experience.expDuration || experience.expReason) && (
+                      <div key={index} className="border border-gray-200 rounded-lg p-4">
+                        <h3 className="text-md font-medium text-gray-800 mb-3">الخبرة العملية {index + 1}</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {experience.expCompany && (
+                            <div>
+                              <label className="text-sm font-medium text-gray-500">الشركة السابقة</label>
+                              <p className="mt-1 text-sm text-gray-900">{experience.expCompany}</p>
+                            </div>
+                          )}
+                          
+                          {experience.expPosition && (
+                            <div>
+                              <label className="text-sm font-medium text-gray-500">المنصب</label>
+                              <p className="mt-1 text-sm text-gray-900">{experience.expPosition}</p>
+                            </div>
+                          )}
+                          
+                          {experience.expDuration && (
+                            <div>
+                              <label className="text-sm font-medium text-gray-500">مدة العمل</label>
+                              <p className="mt-1 text-sm text-gray-900">{experience.expDuration}</p>
+                            </div>
+                          )}
+                          
+                          {experience.expReason && (
+                            <div>
+                              <label className="text-sm font-medium text-gray-500">سبب ترك العمل</label>
+                              <p className="mt-1 text-sm text-gray-900">{experience.expReason}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  ))}
                 </div>
               </div>
             )}

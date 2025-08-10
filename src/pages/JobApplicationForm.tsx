@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { submitJobApplication } from '@/services/api';
-import { JobApplicationSchema, type JobApplicationFormData, type WorkExperience } from '@/schemas';
+import { JobApplicationSchema, type JobApplicationFormData } from '@/schemas';
 import { MaritalStatus } from '@/types';
 import toast from 'react-hot-toast';
 import { 
@@ -24,7 +24,6 @@ import SignatureCanvas from '@/components/SignatureCanvas';
 const JobApplicationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referenceCode, setReferenceCode] = useState('');
-  const [signatureData, setSignatureData] = useState<string>('');
   const [cvFile, setCvFile] = useState<File | null>(null);
   const signatureRef = useRef<any>(null);
 
@@ -39,8 +38,6 @@ const JobApplicationForm = () => {
   } = useForm<JobApplicationFormData>({
     resolver: zodResolver(JobApplicationSchema),
     defaultValues: {
-      appliedBefore: '',
-      relativesInCompany: '',
       workExperiences: [{ expCompany: '', expPosition: '', expDuration: '', expReason: '' }],
     },
   });
@@ -50,8 +47,10 @@ const JobApplicationForm = () => {
     name: 'workExperiences',
   });
 
-  const appliedBefore = watch('appliedBefore') === 'true';
-  const relativesInCompany = watch('relativesInCompany') === 'true';
+  const appliedBeforeValue = watch('appliedBefore');
+  const relativesInCompanyValue = watch('relativesInCompany');
+  const appliedBefore = appliedBeforeValue === 'true';
+  const relativesInCompany = relativesInCompanyValue === 'true';
 
   const submitMutation = useMutation({
     mutationFn: submitJobApplication,
@@ -61,7 +60,6 @@ const JobApplicationForm = () => {
       toast.success('تم إرسال طلبك بنجاح!');
       reset();
       setCvFile(null);
-      setSignatureData('');
       setValue('signature', '');
       signatureRef.current?.clear();
     },
@@ -637,7 +635,6 @@ const JobApplicationForm = () => {
                     <SignatureCanvas
                       ref={signatureRef}
                       onSignatureChange={(signature) => {
-                        setSignatureData(signature);
                         setValue('signature', signature);
                       }}
                       width={350}
@@ -655,7 +652,6 @@ const JobApplicationForm = () => {
                       type="button"
                       onClick={() => {
                         signatureRef.current?.clear();
-                        setSignatureData('');
                         setValue('signature', '');
                       }}
                       className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
