@@ -141,14 +141,26 @@ const JobApplicationForm = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="space-y-6">
+      <div className="bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white py-16 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="space-y-8">
+            {/* Welcome Text */}
+            <div className="space-y-4">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-relaxed">
+                انضم إلى عائلة شركة دلتا للصناعات الغذائية
+              </h1>
+              <p className="text-xl md:text-2xl font-medium text-emerald-100">
+                قدّم طلبك الآن وابدأ مسيرتك المهنية معنا
+              </p>
+            </div>
+            
             {/* Logo */}
             <div className="flex justify-center">
-              <div className="bg-white rounded-2xl p-4 shadow-lg">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
                 <img 
-                  src="/images/alwafi-logo.jpeg" 
+                  src="/images/alwafi-logo.png" 
                   alt="Delta AlWafi Logo" 
                   className="h-20 md:h-24 w-auto"
                   onError={(e) => {
@@ -159,15 +171,16 @@ const JobApplicationForm = () => {
                   }}
                 />
                 {/* Fallback text logo */}
-                <div className="hidden text-green-700 font-bold text-2xl md:text-3xl">
+                <div className="hidden text-white font-bold text-2xl md:text-3xl">
                   Delta AlWafi
                 </div>
               </div>
             </div>
             
-            <div className="space-y-3">
-              <p className="text-xl md:text-2xl text-green-100 font-semibold">نموذج طلب التوظيف</p>
-              <div className="w-24 h-1 bg-white mx-auto rounded-full"></div>
+            {/* Form Title */}
+            <div className="space-y-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-white">نموذج طلب التوظيف</h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto rounded-full"></div>
             </div>
           </div>
         </div>
@@ -685,21 +698,88 @@ const JobApplicationForm = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-green-50 border-t border-green-100 mt-16 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <div className="space-y-4">
+      <footer className="bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 border-t border-emerald-200 mt-16 py-12">
+        <div className="container mx-auto px-4">
+          <div className="space-y-8">
+            {/* Logo */}
             <div className="flex justify-center">
-              <img 
-                src="/images/alwafi-logo.jpeg" 
-                alt="Delta AlWafi Logo" 
-                className="h-12 w-auto opacity-80"
-              />
-            </div>
-            <div className="space-y-2">
-              <p className="text-gray-600">انضم إلى عائلتنا وابدأ مسيرتك المهنية معنا</p>
-              <div className="text-sm text-gray-500">
-                <p>للاستفسارات: info@alwafi-jobs.com</p>
+              <div className="bg-white rounded-xl p-4 shadow-lg">
+                <img 
+                  src="/images/alwafi-logo.png" 
+                  alt="Delta AlWafi Logo" 
+                  className="h-16 w-auto"
+                />
               </div>
+            </div>
+            
+            {/* Company Information */}
+            <div className="text-center space-y-6">
+              <h3 className="text-2xl font-bold text-emerald-800">
+                شركة دلتا للصناعات الغذائية المحدودة
+              </h3>
+              
+              <div className="space-y-4 text-gray-700">
+                {/* Address */}
+                <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <svg className="h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p className="text-lg font-medium">
+                    العراق - بغداد - جسر الرستمية - المنطقة الصناعية
+                  </p>
+                </div>
+                
+                {/* Phone Numbers */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                    <svg className="h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span className="font-medium">الهاتف:</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 max-w-4xl mx-auto">
+                    <p className="text-sm">07801584020</p>
+                    <p className="text-sm">07901907818</p>
+                    <p className="text-sm">077029652950</p>
+                    <p className="text-sm">07400147696</p>
+                    <p className="text-sm">07400145214</p>
+                    <p className="text-sm">07825932701</p>
+                    <p className="text-sm">07721967470</p>
+                  </div>
+                </div>
+                
+                {/* Website */}
+                <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <svg className="h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                  <span className="font-medium">الموقع الإلكتروني:</span>
+                  <a href="https://www.deltaforfood.com" target="_blank" rel="noopener noreferrer" 
+                     className="text-emerald-600 hover:text-emerald-800 transition-colors duration-200 underline">
+                    www.deltaforfood.com
+                  </a>
+                </div>
+                
+                {/* Email */}
+                <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <svg className="h-5 w-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="font-medium">البريد الإلكتروني:</span>
+                  <a href="mailto:info@deltaforfood.com" 
+                     className="text-emerald-600 hover:text-emerald-800 transition-colors duration-200 underline">
+                    info@deltaforfood.com
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            {/* Copyright */}
+            <div className="border-t border-emerald-200 pt-6 text-center">
+              <p className="text-gray-600">
+                © 2025 شركة دلتا للصناعات الغذائية المحدودة. جميع الحقوق محفوظة.
+              </p>
             </div>
           </div>
         </div>
